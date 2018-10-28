@@ -3,21 +3,27 @@
 
 using namespace std;
 
+template <class T>
+void print_vector(vector<T> v){
+	cout << "{ ";
+	for(T a : v){
+		cout << a << " ";
+	}
+	cout << "}\n";
+}
+
 int main(){
 
-	Integer_Ring my_ring(11);
-	cout << "Cardinality: " << cardinality(my_ring.get_ring()) << endl;
-	cout << "Numbers: { ";
-	for(int a : my_ring.get_ring()){
-		cout << a << " ";
-	}
-	cout << "}\n";
-
-	vector<int> gen = find_generators(my_ring.get_ring(), my_ring.get_base());
-	cout << "Generators: { ";
-	for(int a : gen){
-		cout << a << " ";
-	}
-	cout << "}\n";
+	Integer_Ring my_ring(4969);
+	vector<int> ring = my_ring.get_ring();
+	cout << "Cardinality: " << my_ring.cardinality() << endl;
+	cout << "Numbers: ";
+	print_vector<int>(ring);
+	
+	vector<int> gen = my_ring.find_generators();
+	cout << "Generators: ";
+	print_vector<int>(gen);
+	
+	return 0;
 
 }

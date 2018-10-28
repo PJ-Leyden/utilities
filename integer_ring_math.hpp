@@ -9,27 +9,6 @@
 using namespace std;
 
 //inverse of a in integer ring of m
-
-int inverse_in_ring(int a, int m){
-	a = a % m; 
-    for (int x=1; x<m; x++){
-    	if ((a*x) % m == 1){
-    		return x;
-    	}
-    }
-}
-
-int find_order(int a, int m){
-	int x = a;
-	int b = m - 1;
-	for(int i = 1; i < b; i++){
-		if(x == 1){
-			return i;
-		}
-		x = (x * a) % m;
-	}
-}
-
 int gcd(int a, int b){
 	// Everything divides 0  
     if (a == 0){
@@ -61,30 +40,6 @@ int phi(int m){
     return result; 
 }
 
-vector<int> create_integer_ring_coprime(int m){
-	vector<int> result;
-	for(int i = 0; i < m; i++){
-		if(gcd(i, m) == 1){
-			result.push_back(i);
-		}
-	}
-	return result;
-}
-int cardinality(vector<int> ring){
-	return ring.size();
-}
-
-vector<int> find_generators(vector<int> ring, int m){
-	vector<int> result;
-	int order = cardinality(ring);
-	for(int a : ring){
-		if(find_order(a, m) == order){
-			result.push_back(a);
-		}
-	}
-	return result;
-}
-
 class Integer_Ring{
 private:
 	int base;
@@ -92,9 +47,10 @@ private:
 
 public:
 	Integer_Ring(){}
+
 	Integer_Ring(int m){
 		base = m;
-		ring = create_integer_ring_coprime(base);
+		ring = create_integer_ring_coprime();
 	}
 
 	vector<int> get_ring(){
@@ -104,6 +60,52 @@ public:
 	int get_base(){
 		return base;
 	}
+
+	vector<int> find_generators(){
+		vector<int> result;
+		int order = cardinality();
+		for(int a : ring){
+			if(find_order(a) == order){
+				result.push_back(a);
+			}
+		}
+		return result;
+	}
+
+	int cardinality(){
+		return ring.size();
+	}
+
+	vector<int> create_integer_ring_coprime(){
+		vector<int> result;
+		for(int i = 0; i < base; i++){
+			if(gcd(i, base) == 1){
+				result.push_back(i);
+			}
+		}
+		return result;
+	}
+
+	int find_order(int a){
+		int x = a;
+		int b = base - 1;
+		for(int i = 1; i < b; i++){
+			if(x == 1){
+				return i;
+			}
+			x = (x * a) % base;
+		}
+	}
+
+	int inverse_in_ring(int a){
+		a = a % base; 
+    	for (int x = 1; x < base; x++){
+    		if ((a * x) % base == 1){
+    			return x;
+    		}
+   		}
+	}
+
 };
 
 #endif
