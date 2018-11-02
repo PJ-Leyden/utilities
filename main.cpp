@@ -14,15 +14,10 @@ void print_vector(vector<T> v){
 
 int main(){
 
-	Integer_Ring my_ring(4969);
-	vector<int> ring = my_ring.get_ring();
-	cout << "Cardinality: " << my_ring.cardinality() << endl;
-	cout << "Numbers: ";
-	print_vector<int>(ring);
-	
-	vector<int> gen = my_ring.find_generators();
-	cout << "Generators: ";
-	print_vector<int>(gen);
+	Integer_Ring my_ring(17);
+	ab_mod_c(12, 16, 17);
+	ab_mod_c(3, 16, 17);
+
 	
 	return 0;
 

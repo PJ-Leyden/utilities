@@ -40,6 +40,25 @@ int phi(int m){
     return result; 
 }
 
+void ab_mod_c(int a, int b, int c){
+	int x = a;
+	for(int i = 1; i < b; i++){
+		x = (x * a) % c;
+		cout << i << " - " << x << endl;
+	}
+	cout << "Answer = " << x << endl;
+}
+
+void calc(int d){
+	int x = 0;
+	for(int i = 0; i <= d; i++){
+		x = ((3643 * i) + 2212) % 9811;
+		if(x == 0){
+			cout << "The answer is: " << i << endl;
+		}
+	}
+}
+
 class Integer_Ring{
 private:
 	int base;
